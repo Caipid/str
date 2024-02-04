@@ -87,4 +87,5 @@ int main(){
         cout << a[i] << " ";
         fileout << a[i] << " ";
     }
+    delete[] a;
 }
