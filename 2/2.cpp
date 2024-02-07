@@ -5,35 +5,6 @@
 #include <fstream>
 using namespace std;
 
-void create() {
-    int x,y;
-    cout << "Введите размер массива:";
-    cin >> x;
-    ofstream filein("input.dat");
-    filein << x;
-    filein << " - Размер массива";
-}
-
-void random(int a[],int m) {
-    srand(time(NULL));
-    for (int i = 0; i < m; i++) {
-        a[i] = rand() % 201;
-    }
-    
-}
-
-void min(int a[], int m) {
-    int min = 2000;
-    for (int i = 0; i < m; i++) {
-        if (a[i] < min and a[i] > 0) {
-            min = a[i];
-        }
-    }
-    for (int i = 0; i < m; i++) {
-        a[i] += min;
-    }
-    
-}
 
 void Exchange(int i, int j, int* x) {
     int tmp;
@@ -62,39 +33,39 @@ void Quick_Sort(int left, int right, int* x) {
         Quick_Sort(i, right, x);
 }
 
-int main(){
+int main() {
     clock_t start = clock();
     setlocale(LC_ALL, "RU");
-    create();
     int m;
-    ifstream filein("input.dat");
-    ofstream fileout("output.dat");
-    filein >> m;
-    fileout << "Размер массива:";
-    fileout << m << endl;
+    ifstream fileou("outpu.dat");
+    ofstream sortm("sot.dat");
+    fileou >> m;
+    sortm << "Размер массива:";
+    sortm << m << endl;
     int* a = new int[m];
-    random(a, m);
+    for (int i = 0; i < m; i++) {
+        fileou >> a[i];
+    }
     cout << "Исходный массив:" << endl;
-    fileout << "Исходный массив:" << endl;
+    sortm << "Исходный массив:" << endl;
     for (int i = 0; i < m; i++) {
         cout << a[i] << " ";
-        fileout << a[i] << " ";
+        sortm << a[i] << " ";
     }
-    fileout << endl;
-    min(a, m);
+    sortm << endl;
     Quick_Sort(0, m - 1, a);
 
     cout << " " << endl;
     cout << "Отсортированный массив:" << endl;
-    fileout << "Отсортированный массив:" << endl;
+    sortm << "Отсортированный массив:" << endl;
     for (int i = 0; i < m; i++) {
         cout << a[i] << " ";
-        fileout << a[i] << " ";
-
+        sortm << a[i] << " ";
     }
     clock_t end = clock();
     double seconds = (double)(end - start) / CLOCKS_PER_SEC;
     cout << "\nВремя выполнения сортировки:";
     cout << seconds;
     delete[] a;
+
 }
